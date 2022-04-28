@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> Food logging </title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+</head>
+
+<header class="log"> Log Your Food</header>
+<button class="back" onClick="location.href='index.html';">Back</button>
+
+<!-- FORM FIELDS GO HERE --> 
+			<br />
+			<br /><label for="name">Calories Consumed:</label>
+      <input type="number" name="name" id="name" required><br />
+      
+      	<label for="email">Name of Food:</label>
+      	<input type="text" name="email" id="email" required><br />
+      
+			<br />       
+
+<div id="buttons">
+	<button id="alertButton" onClick="enterButtonClicked();">Enter</button>
+	</div>
+	
+	<script>
+	 function enterButtonClicked(){
+    
+    var i=1;
+    while(localStorage.getItem('calories_eaten'+i) != null){
+       i++;
+    }
+    var calories_eaten = document.getElementById("name").value;
+    console.log("calories eaten  "+calories_eaten);
+    // Put the object into storage from Page 1
+    localStorage.setItem('calories_eaten'+i, JSON.stringify(calories_eaten));
+    alert('Food successfully added');
+  }
+	</script>
+	 <nav id="float">
+      <ul>
+         <p>Search for different places, foods, or workouts below! </p>
+         
+         <li><a href="places.html">Places</a></li>
+         <li><a href="food.html">Food</a></li>
+         <li><a href="workout.html">Workout</a></li>
+      </ul>
+   </nav>
+	
+<footer>CS3041: Human-Computer Interaction </footer>
+</body>
+</html>

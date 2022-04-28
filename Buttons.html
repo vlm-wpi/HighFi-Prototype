@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title> Workout logging </title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+</head>
+
+  <header class="log">Log Your Workout</header><br />
+  
+<button class="back" onClick="location.href='index.html';">Back</button>
+
+<!-- FORM FIELDS GO HERE --> 
+			<br /><label for="name">Calories burned:</label>
+      <input type="number" name="name" id="name" required><br />
+      
+      	<label for="email">Type of Workout:</label>
+      	<input type="text" name="email" id="email" required><br />
+      	
+      	<label for="dob">Duration:</label>
+      		<input type="number" name="dob" id="dob" required>  
+      
+			<br />
+			
+			<div id="buttons">
+	      <button id="promptButton" onClick="enterButtonClicked();">Enter</button>
+      </div>
+ <nav id="float">
+      <ul>
+         <p>Search for different places, foods, or workouts below! </p>
+         
+         <li><a href="places.html">Places</a></li>
+         <li><a href="food.html">Food</a></li>
+         <li><a href="workout.html">Workout</a></li>
+      </ul>
+   </nav>
+
+<script>
+
+  function enterButtonClicked(){
+    
+    var i=1;
+    while(localStorage.getItem('calories_burned'+i) != null){
+       i++;
+    }
+    var calories_burned = document.getElementById("name").value;
+    console.log("calories burned "+calories_burned);
+    // Put the object into storage from Page 1
+    localStorage.setItem('calories_burned'+i, JSON.stringify(calories_burned));
+    alert('Workout successfully updated');
+  }
+
+</script>
+
+<footer>CS3041: Human-Computer Interaction </footer>    
+</body>
+</html>

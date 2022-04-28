@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> Today's activity</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+</head>
+<body>
+<button class="back" onclick="location.href='index.html';">Back</button>
+<header>Today's Logs</header>
+<button class="history" onclick="location.href='ride.html';">History</button>
+<div>
+    <br /><button class="edit" onclick="alert('Feature is still a work in progress');">Edit entries</button>
+</div><br />
+<h2>Food:<span class="h1log"></span></h2>
+<p><span id="food"></span></p>
+
+<h2>Activity:<span class="h1log"></span></h2>
+<p><span id="workouts"></span></p>
+
+<script>
+  var i=1;
+  var calories_burned = [];
+  while(localStorage.getItem('calories_burned'+i) != null){
+     var get_calories = localStorage.getItem('calories_burned'+i);
+     var more_calories_burned = JSON.parse(get_calories);
+     console.log("new "+more_calories_burned);
+     more_calories_burned = parseInt(more_calories_burned);
+     calories_burned.push(more_calories_burned);
+     i++;
+  }
+  
+  var k=1;
+  var calories_eaten = [];
+  while(localStorage.getItem('calories_eaten'+k) != null){
+     var get_food = localStorage.getItem('calories_eaten'+k);
+     var more_calories_eaten = JSON.parse(get_food);
+     console.log("new food "+more_calories_eaten);
+     more_calories_eaten = parseInt(more_calories_eaten);
+     calories_eaten.push(more_calories_eaten);
+     k++;
+  }
+  
+  function showfood() {
+    var temperatures = calories_eaten.map(function (t, i) {
+      return (t+" Calories");
+    });
+  
+    document.getElementById('food').innerHTML =
+      '<li>' + temperatures.join('</li><li>') + '</li>';
+  }
+  showfood();
+  
+  function showactivity() {
+    var temperatures = calories_burned.map(function (t, i) {
+      return (t+" Calories burnt");
+    });
+  
+    document.getElementById('workouts').innerHTML =
+      '<li>' + temperatures.join('</li><li>') + '</li>';
+  }
+  showactivity();
+  
+  function reset(){
+    localStorage.clear();
+    window.location.reload();
+  }
+
+</script>
+<button class="clear" onclick="reset()">Clear Today's Logs</button>
+<footer>CS3041: Human-Computer Interaction </footer>
+</body>
+</html>

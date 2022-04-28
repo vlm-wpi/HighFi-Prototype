@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> Calorie Tracker </title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen and (orientation:portrait)"/>
+ 
+   <link rel="stylesheet" type="text/css" href="landscape.css" media="screen and (orientation:landscape)"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+</head>
+
+<body>
+    <!-- HTML5 article tag for content -->
+    <div id="content">
+   
+    <header>Calorie Tracker</header>
+
+   <!-- Load d3.js -->
+   <script src="https://d3js.org/d3.v4.js"></script>
+   
+   <p><span id="encouragement"></span></p>
+   <div><span id="link1"><a href=https://www.thegraciouspantry.com/clean-eating-300-calorie-snacks/>300 calorie snacks</a></span></div>
+   <div><span id="link2"><a href="https://www.youtube.com/watch?v=M0uO8X3_tEA">20 min HIIT workout</a></span></div>
+
+   <!-- Create a div where the graph will take place -->
+   <div onclick="location.href='stores.html';" id="my_dataviz"> </div>
+   
+   <h1><span id="percent"></span>% <span id="consumed"></span>/<span id="goal"></span> Calories</h1>
+   
+   <script>
+      // set the dimensions and margins of the graph
+      var width = 350
+          height = 350
+          margin = 20
+      
+      // The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
+      var radius = Math.min(width, height) / 2 - margin
+      
+      // append the svg object to the div called 'my_dataviz'
+      var svg = d3.select("#my_dataviz")
+        .append("svg")
+          .attr("width", width)
+          .attr("height", height)
+        .append("g")
+          .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      
+      // Create data
+      // Retrieve the object from storage from Page 2
+      var i=1;
+      var calories_burned = [];
+      while(localStorage.getItem('calories_burned'+i) != null){
+         var get_calories = localStorage.getItem('calories_burned'+i);
+         var more_calories_burned = JSON.parse(get_calories);
+         console.log("new "+more_calories_burned);
+         more_calories_burned = parseInt(more_calories_burned);
+         calories_burned.push(more_calories_burned);
+         i++;
+      }
+      console.log("total: "+calories_burned);
+      
+      var k=1;
+      var calories_eaten = [];
+      while(localStorage.getItem('calories_eaten'+k) != null){
+         var get_food = localStorage.getItem('calories_eaten'+k);
+         var more_calories_eaten = JSON.parse(get_food);
+         console.log("new food "+more_calories_eaten);
+         more_calories_eaten = parseInt(more_calories_eaten);
+         calories_eaten.push(more_calories_eaten);
+         k++;
+      }
+      console.log("total ate: "+calories_eaten);
+      
+      var goal = 2000
+      for(j=0; j<calories_burned.length; j++){
+        if(calories_burned[j] != null){
+          goal = goal + calories_burned[j]; //make sure nan
+        }
+      }
+      var calories_consumed = 1500;
+      for(j=0; j<calories_eaten.length; j++){
+         calories_consumed = calories_consumed + calories_eaten[j];
+      }
+      var calories_left = 0; //initially
+      var color = ["white", "blue"];
+      var sort = true;
+      function get_calorie_data(){
+         if(calories_consumed<=goal){
+            calories_left = goal-calories_consumed;
+            calories_graphed = calories_consumed;
+         }
+         else{ //consumed is greater than goal
+            //need to change color too
+            calories_graphed = calories_consumed - goal;
+            calories_left = goal-calories_graphed;
+            color = ["blue", "red"];
+            sort = false;
+         }
+         if(calories_consumed<=(goal/2)){
+            sort=false; //also have to change sort to false 
+            //if calories consumed is less that half of the goal
+         }
+         if(calories_consumed==goal){
+           color = ["#3FA840", "#3FA840"];
+         }
+      }
+      get_calorie_data();
+      var data = {a: calories_left, b: calories_graphed}
+      // set the color scale
+      var color = d3.scaleOrdinal()
+        .domain(data)
+        .range(color)
+      
+      // Compute the position of each group on the pie:
+      if (sort){
+      pie = d3.pie() //<-- pie with default sort
+        .value(function(d) {
+          return d.value;
+        });
+    } else {
+      pie = d3.pie() //<-- pie with sort in ascending
+        .value(function(d) {
+          return d.value;
+        });
+        pie.sortValues(function(a, b) { return a - b; });
+    }
+
+      var data_ready = pie(d3.entries(data))
+      
+      // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+      svg
+        .selectAll('whatever')
+        .data(data_ready)
+        .enter()
+        .append('path')
+        .attr('d', d3.arc()
+          .innerRadius(100)         // This is the size of the donut hole
+          .outerRadius(radius)
+        )
+        .attr('fill', function(d){ return(color(d.data.key)) })
+        .attr("stroke", "black")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7)
+        
+      var encourage = "";
+      var visible1 = "visible";
+      var visible2 = "hidden";
+      if(calories_consumed>goal){
+         encourage = "Oops, looks like you passed your calorie goal... A quick 20 min HIIT workout will get you where you want to be!";
+         visible1 = "none";
+         visible2 = "";
+      }
+      else if(goal>calories_consumed){
+         encourage = "You're so close to reaching your goal! These yummy snacks should get you there:";
+         visible1 = "";
+         visible2 = "none";
+      }
+      else{ //values are equal, both hidden
+         visible1 = "none";
+         visible2 = "none";
+      }
+        
+      var percent = Math.round(100*(calories_consumed/goal));
+      document.getElementById("percent").innerHTML = percent;
+      document.getElementById("consumed").innerHTML = calories_consumed;
+      document.getElementById("goal").innerHTML = goal;
+      document.getElementById("encouragement").innerHTML = encourage;
+      document.getElementById("link1").style.display = visible1;
+      document.getElementById("link2").style.display = visible2;
+
+   </script>
+   
+   <!-- Navigation buttons -->
+   <nav id="main_nav">
+      <ul>
+         <!-- LI stands for list item -->
+         <li><a href="Buttons.html">Add Workout</a></li>
+         <li><a href="maps.html">Add Food</a></li>
+      </ul>
+   </nav>
+   
+      <nav id="float">
+      <ul>
+         <p>Search for different places, foods, or workouts below! </p>
+         
+         <li><a href="places.html">Places</a></li>
+         <li><a href="food.html">Food</a></li>
+         <li><a href="workout.html">Workout</a></li>
+      </ul>
+   </nav>
+
+   <footer>CS3041: Human-Computer Interaction </footer>
+    </div>
+</body>
+</html>
