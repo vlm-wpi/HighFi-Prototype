@@ -1,71 +1,115 @@
 header {
- font-family: Arial, Helvetica, sans-serif;
- font-weight: bold condensed;
- color: Tomato; 
- font-size: 25px;
- padding:5px;
+  font-family: Avantgarde; 
+  font-size: 30px; font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 26.4px;
+  color: black; 
+  padding:5px;
+  text-align: center;
+  border: 1px solid #666; /* dark outline */
+  border-radius: 10px;  /* rounded corners */
+  display:inline;
+  position: relative;
+  top: 6px; 
+  background-color: LightGoldenRodYellow;
 }
 
+header.log {
+  font-family: Avantgarde; 
+  font-size: 25px; font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 26.4px;
+  color: black; 
+  padding:5px;
+  text-align: center;
+  border: 1px solid #666; /* dark outline */
+  border-radius: 10px;  /* rounded corners */
+  display:inline;
+  position: relative;
+  top: 6px; 
+  background-color: LightPink;
+  
+}
+header.search {
+  font-family: Avantgarde; 
+  font-size: 25px; font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 26.4px;
+  color: black; 
+  padding:5px;
+  text-align: center;
+  border: 1px solid #666; /* dark outline */
+  border-radius: 10px;  /* rounded corners */
+  display:inline;
+  position: relative;
+  top: 6px;
+  background-color: LightPink;
+}
+
+
 body {
- font-family: Arial, Helvetica, sans-serif;
+ font-family: Avantgarde; 
  font-weight: bold condensed;
- color: Violet; 
- font-size: 15px;
+ color: black; 
+ font-size: 20px;
+ text-align: center;
+ 
 }
 
 h1 {
- font-family: Arial, Helvetica, sans-serif;
+ font-family: Avantgarde; 
  font-weight: bold condensed;
- color: SlateBlue; 
- font-size: 15px;
+ color: DarkOrange; 
+ font-size: 25px;
  padding:5px;
+ background-color: LightGoldenRodYellow;
+}
+
+h2 {
+ color: Black; 
+ font-size: 25px;
+ padding:5px;
+ text-align: left;
+ background-color: LightPink;
 }
 
 #content {
     padding:3px;
+    background-color: PapayaWhip;
+   
 }
 
 p {
   padding:10px;
+  border: 1px solid #666; /* dark outline */
+  border-radius: 10px;  /* rounded corners */
+  text-align: left;
+  color: Black;
+  background-color: Lavender;
 }
-
-#WPI{
-    /*center the image*/
-    display: block; 
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;}
     
-#main_nav ul {
-	list-style: none;
-	padding: 0;
-	margin: 10px;
-	font-weight: bold;
-}
- 
-#main_nav ul li {
-	background-color: #fff;
-	border: 1px solid #999;
-	color: #222;
-	display: block;
-	margin-bottom: -1px;
-	padding: 12px 10px;
-}
- 
-#main_nav ul li a{
-	text-decoration: none;
-  }
-  
-/* add traditional rounded corners to the navigation menu*/
+#main_nav ul { padding: 0; margin: 0; }
 
-#main_nav li:first-child{
-    -webkit-border-top-left-radius: 8px;
-    -webkit-border-top-right-radius: 8px;
+#main_nav li  {
+  list-style-type: none; /* remove bullet points */ 
 }
- 
-#main_nav li:last-child{
-    -webkit-border-bottom-left-radius: 8px;
-    -webkit-border-bottom-right-radius: 8px;
+
+#main_nav li a {
+   text-decoration: none; /* remove underline */
+   border-radius: 10px;  /* rounded corners */
+   margin: 5px;
+   padding: 5px;
+   color: black;
+   font-weight: bold;
+   display:inline-block;
+  background-color: Yellow;
+   /* nice gradient shade on the buttons */
+   background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+
+   border: 1px solid #666; /* dark outline */
 }
 
 nav li:active {
@@ -75,9 +119,145 @@ nav li:active {
 }
 
 footer {
- font-family:  Arial, Helvetica, sans-serif;
+ font-family: Avantgarde; 
  font-weight: bold condensed;
  color: #A9B0B7; 
  font-size: 10px;
  padding:1px;
+ background-color: Lavender;
+}
+
+button.history{
+ /*These lines override the previous styling of buttons*/
+background-size: cover;
+width:60px;
+height: 30px;
+/*These lines position the back button inside the header*/
+position:absolute;
+left:316px;
+top:8px; 
+background-color: Lavender;
+  
+}
+
+button.home{
+ /*These lines override the previous styling of buttons*/
+background-size: cover;
+width:60px;
+height: 30px;
+/*These lines position the back button inside the header*/
+position:absolute;
+left:316px;
+top:8px; 
+background-color: Lavender;
+  
+}
+
+button.back{
+ /*These lines override the previous styling of buttons*/
+background-size: cover;
+width:60px;
+height: 30px;
+ 
+/*These lines position the back button inside the header*/
+position:absolute;
+left:16px;
+top:8px; 
+  background-color: Lavender;
+}
+
+button.edit{
+ /*These lines override the previous styling of buttons*/
+background-size: cover;
+width:100px;
+height: 30px;
+/*These lines position the back button inside the header*/
+left:16px;
+top:20px; 
+float: left;
+background-color: Lavender;
+  
+}
+
+button {
+ /*center the button*/
+display: block;
+margin-left: auto;
+margin-right: auto;
+ 
+/* add your code to set top and bottom margins */
+ 	margin-top: 1px;
+  margin-bottom: 5px;
+ 
+/*add an image to your button*/
+background-size: cover;
+
+/*set width and height for the button*/
+width:100px;
+height: 30px;
+background-color: Lavender;
+}
+
+#link1 {
+  color: black;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #666; /* dark outline */
+  background-color: Lavender;
+}
+#link2 {
+  color: black;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #666; /* dark outline */
+  border-radius: 10px;  /* rounded corners */
+  background-color: Lavender;
+}
+
+#float ul,
+ol {
+    position: relative;
+    display: block;
+    text-align: center;
+    padding: 0; 
+    margin: 0;
+}
+#float li {
+    width: auto;
+    display: inline;
+    list-style-type: none; /* remove bullet points */ 
+}
+
+#float li a {
+   text-decoration: none; /* remove underline */
+   border-radius: 10px;  /* rounded corners */
+   margin: 5px;
+   padding: 5px;
+   color: black;
+   font-weight: bold;
+   display:inline-block;
+   background-color: ForestGreen;
+  
+   /* nice gradient shade on the buttons */
+   background-image: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+
+   border: 1px solid #666; /* dark outline */
+}
+button {
+ /*center the button*/
+display: block;
+margin-left: auto;
+margin-right: auto;
+ 
+/* add your code to set top and bottom margins */
+ 	margin-top: 1px;
+  margin-bottom: 5px;
+ 
+/*add an image to your button*/
+background-size: cover;
+
+/*set width and height for the button*/
+width:150px;
+height: 30px;
+background-color: Lavender;
 }
